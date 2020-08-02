@@ -1,0 +1,9 @@
+localhost:
+  Name: localhost
+  Proto: tcp
+  Addr: 127.0.0.1:6379
+  Auth:
+  DB: 0
+  DialTimeout: 3 * time.Minute
+  ReadTimeout: 1 * time.Minute
+  WriteTimeout: 1 * time.Minute
