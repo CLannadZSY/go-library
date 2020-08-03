@@ -13,8 +13,8 @@ require (
 ```
 
 ### Example
-1. `配置文件` 参考,  请不要修改配置文件中的字段名称, 否则将导致读取失败
-   [`redis_config`](https://github.com/CLannadZSY/go-library/blob/master/database/redis/redis_config.yaml)
+1. `配置文件` 参考,  请不要修改配置文件中的字段名称, 否则将导致读取失败<br>
+   [`redis_config`](https://github.com/CLannadZSY/go-library/blob/master/database/redis/redis_config.yaml)<br>
 
    [`mysql_config`](https://github.com/CLannadZSY/go-library/blob/master/database/sql/mysql_config.yaml)
 
@@ -22,7 +22,7 @@ require (
 
 3. 使用方法, 请参考  `*_test.go` 文件
 
-   [`redis`](https://github.com/CLannadZSY/go-library/blob/master/database/redis/redis_test.go)
+   [`redis`](https://github.com/CLannadZSY/go-library/blob/master/database/redis/redis_test.go)<br>
    [`mysql`](https://github.com/CLannadZSY/go-library/blob/master/database/sql/mysql_test.go)
 
 
