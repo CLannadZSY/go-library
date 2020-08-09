@@ -31,6 +31,7 @@ require (
 
 ### Release History
 
+* 2020-08-09: 完成```v1.0.1```版本 
 * 2020-08-02: 完成```v1.0.0```版本 
 
 ### [License](https://github.com/CLannadZSY/go-library/blob/master/LICENSE)
