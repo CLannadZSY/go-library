@@ -29,9 +29,6 @@ require (
 ### Contributing
 欢迎  `PR`  和   `ISSUES`
 
-### Release History
-
-* 2020-08-09: 完成```v1.0.1```版本 
-* 2020-08-02: 完成```v1.0.0```版本 
+### [Release History](https://github.com/CLannadZSY/go-library/releases)
 
 ### [License](https://github.com/CLannadZSY/go-library/blob/master/LICENSE)
