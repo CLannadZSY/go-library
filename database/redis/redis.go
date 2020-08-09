@@ -16,13 +16,13 @@ type Config struct {
 	Proto        string // tcp
 	Addr         string // "127.0.0.1:6379"
 	Auth         string // passwd
-	DB           string
+	DB           int
 	DialTimeout  time.Duration // 拨号超时
 	ReadTimeout  time.Duration // 读取超时
 	WriteTimeout time.Duration // 写入超时
 }
 
-func InitReadConfig(KeyName, FilePath, FileType string) *Config {
+func InitReadConfig(KeyName, FilePath, FileType string, DB int) *Config {
 	if FilePath == "" {
 		FilePath = FILEPATH
 	}
@@ -48,7 +48,7 @@ func InitReadConfig(KeyName, FilePath, FileType string) *Config {
 		viper.GetString(KeyName + ".Proto"),
 		viper.GetString(KeyName + ".Addr"),
 		viper.GetString(KeyName + ".Auth"),
-		viper.GetString(KeyName + ".DB"),
+		DB,
 		viper.GetDuration(KeyName + ".DialTimeout"),
 		viper.GetDuration(KeyName + ".ReadTimeout"),
 		viper.GetDuration(KeyName + ".WriteTimeout"),
@@ -57,8 +57,8 @@ func InitReadConfig(KeyName, FilePath, FileType string) *Config {
 
 // 纯粹的执行命令版本,
 // 将一些命令进行了封装的包 https://github.com/go-redis/redis
-func ConnectRedis(keyName, filePath, fileType string) *redis.Pool {
-	config := InitReadConfig(keyName, filePath, fileType)
+func ConnectRedis(keyName, filePath, fileType string, DB int) *redis.Pool {
+	config := InitReadConfig(keyName, filePath, fileType, DB)
 	pool, err := PoolInitRedis(config)
 	if err != nil {
 		panic(err)
