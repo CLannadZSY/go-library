@@ -8,7 +8,7 @@ import (
 func TestMysql(t *testing.T) {
 	writeKey := "test"
 	readKey := "test"
-	db := ConnectMysql(writeKey, readKey, "", "")
+	db := ConnectMysql(writeKey, readKey, "mysql_config.yaml")
 	defer db.Close()
 
 	testPing(t, db)

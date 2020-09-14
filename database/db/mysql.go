@@ -7,11 +7,11 @@ import (
 	"log"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 )
 
-const FILEPATH = "mysql_config"
-const FILETYPE = "yaml"
+const FILEPATH = "mysql_config.yaml"
 
 type DB struct {
 	write  *conn
@@ -52,41 +52,34 @@ type Config struct {
 	TranTimeout  time.Duration // transaction sql timeout
 }
 
-func InitReadConfig(KeyName, FilePath, FileType string) BaseConfig {
+func InitReadConfig(KeyName, FilePath string) BaseConfig {
 	if FilePath == "" {
 		FilePath = FILEPATH
 	}
-	if FileType == "" {
-		FileType = FILETYPE
-	}
-	viper.AddConfigPath(".")
-	viper.SetConfigName(FilePath) // 读取文件名称为
-	viper.SetConfigType(FileType)
+	viper.SetConfigFile(FilePath)
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			// Config file not found; ignore error if desired
 			log.Println("no such config file")
 		} else {
-			// Config file was found but another error was produced
 			log.Println("read config error")
 		}
 		panic(err) // 读取配置文件失败致命错误
 	}
 
 	return BaseConfig{
-		viper.GetString(KeyName + ".username"),
-		viper.GetString(KeyName + ".password"),
-		viper.GetString(KeyName + ".addr"),
-		viper.GetString(KeyName + ".port"),
-		viper.GetString(KeyName + ".dbName"),
+		viper.GetString(KeyName + ".UserName"),
+		viper.GetString(KeyName + ".PassWord"),
+		viper.GetString(KeyName + ".Addr"),
+		viper.GetString(KeyName + ".Port"),
+		viper.GetString(KeyName + ".DBName"),
 	}
 }
 
-func ConnectMysql(WriteKey, ReadKey string, FilePath, Filetype string) (db *DB) {
-	writeConfig := InitReadConfig(WriteKey, FilePath, Filetype)
+func ConnectMysql(WriteKey, ReadKey, FilePath string) (db *DB) {
+	writeConfig := InitReadConfig(WriteKey, FilePath)
 	dsn := FormatConfig(&writeConfig)
 
-	readConfig := InitReadConfig(ReadKey, FilePath, Filetype)
+	readConfig := InitReadConfig(ReadKey, FilePath)
 	readDSN := FormatConfig(&readConfig)
 
 	c := Config{

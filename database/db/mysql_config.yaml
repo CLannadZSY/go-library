@@ -1,0 +1,7 @@
+test:
+  UserName: root
+  PassWord: zhengshuyuan
+  Addr: 127.0.0.1
+  Port: 3306
+  DBName: test
+
