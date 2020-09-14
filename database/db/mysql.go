@@ -14,10 +14,10 @@ import (
 const FILEPATH = "mysql_config.yaml"
 
 type DB struct {
-	write  *conn
-	read   *conn
-	idx    int64
-	master *DB
+	Write  *conn
+	Read   *conn
+	Idx    int64
+	Master *DB
 }
 
 //conn database connection
@@ -126,9 +126,9 @@ func Open(c *Config) (*DB, error) {
 	}
 	w := &conn{DB: d, conf: c}
 	rs := &conn{DB: d, conf: c}
-	db.write = w
-	db.read = rs
-	db.master = &DB{write: db.write}
+	db.Write = w
+	db.Read = rs
+	db.Master = &DB{Write: db.Write}
 	return db, nil
 }
 
@@ -145,11 +145,11 @@ func Connect(c *Config, dataSourceName string) (*sql.DB, error) {
 }
 
 func (db *DB) Close() (err error) {
-	if e := db.write.Close(); e != nil {
+	if e := db.Write.Close(); e != nil {
 		err = errors.WithStack(e)
 	}
 
-	if e := db.read.Close(); e != nil {
+	if e := db.Read.Close(); e != nil {
 		err = errors.WithStack(e)
 	}
 	return
