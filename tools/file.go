@@ -1,6 +1,4 @@
-/*
-一些常用的 go 函数
-*/
+package file
 
 //CopyFile 复制文件
 func CopyFile(dstName, srcName string) (written int64, err error) {
